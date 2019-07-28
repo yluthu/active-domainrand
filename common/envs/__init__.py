@@ -6,10 +6,24 @@ from common.envs.car_racing import CarRacingRandomized
 import os.path as osp
 
 register(
-    id='CarRacingDefault-v0',
-    entry_point='common.envs.car_racing:CarRacingRandomized',
-    max_episode_steps=1000,
-    kwargs={'config': 'common/envs/config/CarRacingRandomized/default.json'}
+    id='CartPoleRandomized-v0',
+    entry_point='common.envs.cartpole:CartPoleRandomized',
+    max_episode_steps=200,
+    kwargs={'config': 'common/envs/config/CartPoleRandomized/randomized.json'}
+)
+
+register(
+    id='CartPoleHard-v0',
+    entry_point='common.envs.cartpole:CartPoleRandomized',
+    max_episode_steps=200,
+    kwargs={'config': 'common/envs/config/CartPoleRandomized/hard.json'}
+)
+
+register(
+    id='CartPoleDefault-v0',
+    entry_point='common.envs.cartpole:CartPoleRandomized',
+    max_episode_steps=200,
+    kwargs={'config': 'common/envs/config/CartPoleRandomized/default.json'}
 )
 
 register(
@@ -24,6 +38,13 @@ register(
     entry_point='common.envs.car_racing:CarRacingRandomized',
     max_episode_steps=1000,
     kwargs={'config': 'common/envs/config/CarRacingRandomized/hard.json'}
+)
+
+register(
+    id='CarRacingDefault-v0',
+    entry_point='common.envs.car_racing:CarRacingRandomized',
+    max_episode_steps=1000,
+    kwargs={'config': 'common/envs/config/CarRacingRandomized/default.json'}
 )
 
 # Needed because of gym.space error in normal LunarLander-v2

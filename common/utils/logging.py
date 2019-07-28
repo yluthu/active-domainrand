@@ -192,7 +192,7 @@ class StatsLogger:
         self.randomized_discrim_scores_median = []
         self.reference_discrim_scores_median = []
 
-        self.current_best = -np.inf if (args.randomized_env_id.find('Racing') != -1 or args.randomized_env_id.find('Lunar') != -1) else np.inf
+        self.current_best = -np.inf if (args.randomized_env_id.find('Car') != -1 or args.randomized_env_id.find('Lunar') != -1) else np.inf
 
     def update(self, args, paths, info):
         self.randomized_discrim_scores_mean.append(info['randomized_discrim_score_mean'])
@@ -217,7 +217,7 @@ class StatsLogger:
             self.rand_learning_curve_median.append(info['agent_randomized_eval_rewards_median'])
 
             evaluation_key = 'agent_randomized_eval_rewards_median'
-            if args.randomized_env_id.find('Racing') == -1 and args.randomized_env_id.find('Lunar') == -1:
+            if args.randomized_env_id.find('Car') == -1 and args.randomized_env_id.find('Lunar') == -1:
                 self.ref_final_dists_mean.append(info['final_dist_ref_mean'])
                 self.rand_final_dists_mean.append(info['final_dist_rand_mean'])
                 self.ref_final_dists_median.append(info['final_dist_ref_median'])

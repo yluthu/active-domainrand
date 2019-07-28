@@ -85,7 +85,7 @@ def evaluate_policy(nagents, env, agent_policy, replay_buffer, eval_episodes, ma
 
 
 def check_solved(env_name, criteria):
-    if env_name.find('Racing') != -1:
+    if env_name.find('Car') != -1:
         return np.median(criteria) > CAR_RACING_SOLVED_SCORE
     elif env_name.find('Lunar') != -1:
         return np.median(criteria) > LUNAR_LANDER_SOLVED_SCORE

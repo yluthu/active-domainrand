@@ -2,10 +2,12 @@ import os
 import numpy as np
 import logging
 import matplotlib.pyplot as plt
+import gym
 
 from common.utils.rollout_evaluation import evaluate_policy
 
 from common.envs.randomized_vecenv import make_vec_envs
+from common.envs.wrappers import RandomizedEnvWrapper
 
 
 DISPLAY_FREQUENCY = 5
@@ -17,7 +19,7 @@ plt.rcParams.update({'font.size': 22})
 logger = logging.getLogger(__name__)
 
 def get_config(env_id):
-    if env_id.find('Racing') != -1:
+    if env_id.find('Car') != -1:
         return {
             'ylabel': 'Average Reward',
             'ylim_low': -200,
@@ -75,8 +77,12 @@ class Visualizer(object):
         self.neval_eps = neval_eps
         self.seed = seed
 
-        self.log_distances = randomized_env_id.find('Racing') == -1 and randomized_env_id.find('Lunar') == -1
+        self.log_distances = randomized_env_id.find('Car') == -1 and randomized_env_id.find('Lunar') == -1
         self.randomized_env = make_vec_envs(self.randomized_env_id, self.seed, self.neval_eps)
+        
+        env = gym.make(randomized_env_id)
+        env = RandomizedEnvWrapper(env, seed)
+        self.defaults = [item.default_value for item in env.unwrapped.dimensions]
 
     def generate_ground_truth(self, simulator_agent, agent_policy, timesteps, log_path):
         logger.debug('Generating ground truth...')
@@ -190,8 +196,9 @@ class Visualizer(object):
                     values[0][randomized_dimension] = x
 
                 for item in values:
-                    if item[0] == 'default':
-                        item[0] = self.randomized_env.unwrapped.dimensions[dimension].default_value
+                    for i in range(len(item)):
+                        if item[i] == 'default':
+                            item[i] = self.defaults[i]
                 values = np.array(values)
                 empirical_values = []
                 for policy_idx in range(simulator_agent.nagents):
