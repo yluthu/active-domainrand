@@ -1,0 +1,23 @@
+{
+  "env": "CarRacingRandomized-v0",
+  "dimensions": [
+    {
+      "name": "engine_power",
+      "default": 40000.0,
+      "multiplier_min": 1.0,
+      "multiplier_max": 1.0
+    },
+    {
+      "name": "wheel_moment_of_inertia",
+      "default": 1.6,
+      "multiplier_min": 1.0,
+      "multiplier_max": 1.0
+    },
+    {
+      "name": "friction_limit",
+      "default": 400.0,
+      "multiplier_min": 1.0,
+      "multiplier_max": 1.0
+    }
+  ]
+}

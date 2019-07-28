@@ -19,7 +19,7 @@ COLORS = ["#95d0ff", "#966bff", "#ff6ad5", "#ffa58b", "#ff6a8b"]
 def get_args():
     parser = argparse.ArgumentParser(description='Domain Randomization Driver')
     parser.add_argument('--environment', type=str,
-                        choices=['lunar', 'pusher', 'ergo', 'ergosix', 'lunar2', 'lunarbootstrap'])
+                        choices=['car', 'lunar', 'pusher', 'ergo', 'ergosix', 'lunar2', 'lunarbootstrap'])
     parser.add_argument('--filter', type=float)
     return parser.parse_args()
 

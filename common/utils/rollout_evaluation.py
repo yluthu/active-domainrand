@@ -1,6 +1,7 @@
 import numpy as np
 
 LUNAR_LANDER_SOLVED_SCORE = 200.0
+CAR_RACING_SOLVED_SCORE = 500.0
 ERGO_SOLVED_DISTANCE = 0.025
 PUSHER_SOLVED_DISTANCE = 0.25  # Radius=0.17
 
@@ -84,7 +85,9 @@ def evaluate_policy(nagents, env, agent_policy, replay_buffer, eval_episodes, ma
 
 
 def check_solved(env_name, criteria):
-    if env_name.find('Lunar') != -1:
+    if env_name.find('Racing') != -1:
+        return np.median(criteria) > CAR_RACING_SOLVED_SCORE
+    elif env_name.find('Lunar') != -1:
         return np.median(criteria) > LUNAR_LANDER_SOLVED_SCORE
     elif env_name.find('Ergo') != -1:
         return np.median(criteria) < ERGO_SOLVED_DISTANCE

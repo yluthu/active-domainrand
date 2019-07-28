@@ -9,12 +9,27 @@ def get_args():
 
     subparsers = parser.add_subparsers(help='sub-command help', dest='subparser_name')
 
+    car_subparser = subparsers.add_parser('car', help='car racing subparser')
     lunar_subparser = subparsers.add_parser('lunar', help='lunar lander subparser')
     pusher_subparser = subparsers.add_parser('pusher', help='puhser-3dof subparser')
     ergo_subparser = subparsers.add_parser('ergo', help='ergoreacher subparser')
     backlash_subparser = subparsers.add_parser('backlash', help='ergoreacher with backlash subparser')
     ergosix_subparser = subparsers.add_parser('ergosix', help='ergoreacher 6dpf subparser')
 
+    car_subparser.add_argument("--reference-env-id", default="CarRacingDefault-v0", 
+        type=str, help="Name of the reference environment")
+    car_subparser.add_argument("--randomized-env-id", default="CarRacingRandomized-v0", 
+        type=str, help="Name of the randomized environment")
+    car_subparser.add_argument("--randomized-eval-env-id", default="CarRacingRandomized-v0", 
+        type=str, help="Name of the randomized environment")
+    car_subparser.add_argument("--nparams", default=3, type=int, help="Number of randomization parameters")
+    car_subparser.add_argument("--eval-randomization-discretization", default=10, type=int, help="number of eval points")
+    car_subparser.add_argument("--max-env-timesteps", default=1000, type=int, 
+            help="environment timeout")
+    car_subparser.add_argument("--plot-frequency", default=5, type=int, help="how often to plot / log")
+    car_subparser.add_argument("--nagents", default=10, type=int, 
+            help="Number of SVPG particle")
+    
     lunar_subparser.add_argument("--randomized-env-id", default="LunarLanderDefault-v0", 
         type=str, help="Name of the reference environment")
     lunar_subparser.add_argument("--reference-env-id", default="LunarLanderDefault-v0", 
@@ -85,7 +100,7 @@ def get_args():
     ergosix_subparser.add_argument("--nagents", default=10, type=int, 
             help="Number of SVPG particle")
 
-    for subparser in [lunar_subparser, pusher_subparser, ergo_subparser, backlash_subparser, ergosix_subparser]:
+    for subparser in [car_subparser, lunar_subparser, pusher_subparser, ergo_subparser, backlash_subparser, ergosix_subparser]:
         subparser.add_argument("--experiment-name", type=str, 
             choices=['bootstrapping', 'unfreeze-policy'])
         subparser.add_argument("--experiment-prefix", default="experiment", type=str, help="Any custom string to attach")

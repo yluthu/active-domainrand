@@ -2,7 +2,29 @@ from gym.envs.registration import register
 
 from common.envs.config import CONFIG_PATH
 from common.envs.lunar_lander import LunarLanderRandomized
+from common.envs.car_racing import CarRacingRandomized
 import os.path as osp
+
+register(
+    id='CarRacingDefault-v0',
+    entry_point='common.envs.car_racing:CarRacingRandomized',
+    max_episode_steps=1000,
+    kwargs={'config': 'common/envs/config/CarRacingRandomized/default.json'}
+)
+
+register(
+    id='CarRacingRandomized-v0',
+    entry_point='common.envs.car_racing:CarRacingRandomized',
+    max_episode_steps=1000,
+    kwargs={'config': 'common/envs/config/CarRacingRandomized/randomized.json'}
+)
+
+register(
+    id='CarRacingHard-v0',
+    entry_point='common.envs.car_racing:CarRacingRandomized',
+    max_episode_steps=1000,
+    kwargs={'config': 'common/envs/config/CarRacingRandomized/hard.json'}
+)
 
 # Needed because of gym.space error in normal LunarLander-v2
 register(

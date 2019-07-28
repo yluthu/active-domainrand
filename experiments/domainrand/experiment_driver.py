@@ -42,6 +42,7 @@ if __name__ == '__main__':
             state_dim=reference_env.observation_space.shape[0], 
             action_dim=reference_env.action_space.shape[0], 
             agent_name=args.agent_name,
+            use_conv=('Racing' in args.reference_env_id)
         )
 
         if args.load_agent:

@@ -66,7 +66,9 @@ class SVPGSimulatorAgent(object):
         self.state_dim = self.reference_env.observation_space.shape[0]
         self.action_dim = self.reference_env.action_space.shape[0]
     
-        if reference_env_id.find('Pusher') != -1:
+        if reference_env_id.find('Racing') != -1:
+            self.hard_env = make_vec_envs('CarRacingHard-v0', seed, nagents)
+        elif reference_env_id.find('Pusher') != -1:
             self.hard_env = make_vec_envs('Pusher3DOFHard-v0', seed, nagents)
         elif reference_env_id.find('Lunar') != -1:
             self.hard_env = make_vec_envs('LunarLander10-v0', seed, nagents)

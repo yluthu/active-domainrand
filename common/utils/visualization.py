@@ -17,7 +17,18 @@ plt.rcParams.update({'font.size': 22})
 logger = logging.getLogger(__name__)
 
 def get_config(env_id):
-    if env_id.find('Lunar') != -1:
+    if env_id.find('Racing') != -1:
+        return {
+            'ylabel': 'Average Reward',
+            'ylim_low': -200,
+            'ylim_high': 1000,
+            'hist_ylim_high': 400,
+            'solved': 500,
+            'npoints': 10,
+            'max_steps': 1000
+        }
+    
+    elif env_id.find('Lunar') != -1:
         return {
             'ylabel': 'Average Reward',
             'ylim_low': -200,
@@ -64,7 +75,7 @@ class Visualizer(object):
         self.neval_eps = neval_eps
         self.seed = seed
 
-        self.log_distances = randomized_env_id.find('Lunar') == -1
+        self.log_distances = randomized_env_id.find('Racing') == -1 and randomized_env_id.find('Lunar') == -1
         self.randomized_env = make_vec_envs(self.randomized_env_id, self.seed, self.neval_eps)
 
     def generate_ground_truth(self, simulator_agent, agent_policy, timesteps, log_path):
