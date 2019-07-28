@@ -189,6 +189,9 @@ class Visualizer(object):
                 for index in range(self.neval_eps):
                     values[0][randomized_dimension] = x
 
+                for item in values:
+                    if item[0] == 'default':
+                        item[0] = self.randomized_env.unwrapped.dimensions[dimension].default_value
                 values = np.array(values)
                 empirical_values = []
                 for policy_idx in range(simulator_agent.nagents):
